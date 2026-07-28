@@ -1,0 +1,5 @@
+# ignore .rest files
+*.rest
+
+# ignore node_modules
+node_modules/
