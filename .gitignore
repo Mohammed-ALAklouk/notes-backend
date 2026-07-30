@@ -1,8 +1,7 @@
-# ignore .rest files
+# ignore files
 *.rest
+*.env
 
-# ignore node_modules
+# ignore folders 
 node_modules/
-
-# ignore frontend 
 frontend/
