@@ -4,4 +4,4 @@
 
 # ignore folders 
 node_modules/
-frontend/
+rest/
