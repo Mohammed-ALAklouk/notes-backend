@@ -17,9 +17,6 @@ const errorHandler = (error, request, response, next) => {
 
 app.use(express.static('dist'))
 app.use(express.json())
-// this has to be the last loaded middleware, also all the routes should be registered before this!
-app.use(errorHandler)
-
 
 app.get('/api/notes', (request, response, next) => {
   Note.find({}).then(notes => {
@@ -79,7 +76,12 @@ app.put('/api/notes/:id', (request, response, next) => {
     })
     .catch(error => next(error))
 })
+
+// this has to be the last loaded middleware, also all the routes should be registered before this!
+app.use(errorHandler)
+
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })  
+
