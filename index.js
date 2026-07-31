@@ -1,7 +1,6 @@
 require('dotenv').config() 
 const Note = require('./modules/note')
 const express = require('express')
-const mongoose = require('mongoose')
 const app = express()
 
 const errorHandler = (error, request, response, next) => {
@@ -50,7 +49,6 @@ app.post('/api/notes', (request, response, next) => {
     const note = new Note({
         content: request.body.content,
         important: request.body.important || false,
-        date: new Date(),
     })
     
     note.save().then(savedNote => {
