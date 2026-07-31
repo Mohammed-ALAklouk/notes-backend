@@ -1,4 +1,4 @@
-require('dotenv').config() 
+require('dotenv').config()
 const Note = require('./modules/note')
 const express = require('express')
 const app = express()
@@ -26,36 +26,36 @@ app.get('/api/notes', (request, response, next) => {
 })
 
 app.get('/api/notes/:id', (request, response, next) => {
-    const id = request.params.id
-    Note.findById(id).then(note => {
-        if (note) {
-            response.json(note)
-        } else {
-            response.status(404).end()
-        }
-    }).catch(error => next(error))
+  const id = request.params.id
+  Note.findById(id).then(note => {
+    if (note) {
+      response.json(note)
+    } else {
+      response.status(404).end()
+    }
+  }).catch(error => next(error))
 })
 
 app.delete('/api/notes/:id', (request, response, next) => {
-    const id = request.params.id
-    Note.findByIdAndDelete(id).then(() => {
-        response.status(204).end()
-    }).catch(error => next(error))
+  const id = request.params.id
+  Note.findByIdAndDelete(id).then(() => {
+    response.status(204).end()
+  }).catch(error => next(error))
 })
 
 app.post('/api/notes', (request, response, next) => {
-    if (request.body === undefined || request.body.content === undefined){ 
-        return response.status(400).json({ error: 'content missing' })
-    }
-    
-    const note = new Note({
-        content: request.body.content,
-        important: request.body.important || false,
-    })
-    
-    note.save().then(savedNote => {
-        response.json(savedNote)
-    }).catch(error => next(error))
+  if (request.body === undefined || request.body.content === undefined){
+    return response.status(400).json({ error: 'content missing' })
+  }
+
+  const note = new Note({
+    content: request.body.content,
+    important: request.body.important || false,
+  })
+
+  note.save().then(savedNote => {
+    response.json(savedNote)
+  }).catch(error => next(error))
 })
 
 app.put('/api/notes/:id', (request, response, next) => {
@@ -83,5 +83,5 @@ app.use(errorHandler)
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
-})  
+})
 
